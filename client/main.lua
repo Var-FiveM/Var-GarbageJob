@@ -133,7 +133,7 @@ Citizen.CreateThread(function()
                         if dist < 64 then
                             DrawMarker(0, BagPos, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 1.0, 0.25, 0, 151, 168, 112, 0, 0, 2, 0,0, 0, 0)
                             if dist < 2 and not IsPedInAnyVehicle(pPed) then
-                                ESX.DrawTopNotification(Shared.Locale.TakeBag)
+                                DrawTopNotification(Shared.Locale.TakeBag)
                                 if IsControlJustPressed(1, 51) then
                                     SetBag(pPed, false)
                                     
@@ -144,7 +144,7 @@ Citizen.CreateThread(function()
                             end
                         end
                     else
-                        ESX.DrawTopNotification(Shared.Locale.DropBag)
+                        DrawTopNotification(Shared.Locale.DropBag)
                         if IsControlJustPressed(1, 51) and not IsInAction then
                             local vehicle = GetVehInSight()
                             if (GetDistanceBetweenCoords(pCoords, GetEntityCoords(vehicle) - GetEntityForwardVector(vehicle) * 5) < 2 or IsPedInAnyVehicle(pPed)) and GetEntityModel(vehicle) == 1917016601 then

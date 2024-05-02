@@ -28,7 +28,7 @@ Citizen.CreateThread(function()
             if dist < 1.5 then 
                 wait = 0
                 local notificationMsg = InService and Shared.Locale.Stop or Shared.Locale.Start
-                ESX.DrawTopNotification(notificationMsg)
+                DrawTopNotification(notificationMsg)
                 if IsControlJustPressed(1, 54) then
                     StartInService()
                 end
@@ -48,7 +48,7 @@ Citizen.CreateThread(function()
                 local dist = Vdist(pCoords, pos)
                 if IsPedInAnyVehicle(PlayerPedId(), false) and dist <= 3.5 then
                     wait = 0
-                    ESX.DrawTopNotification(Shared.Locale.Store)
+                    DrawTopNotification(Shared.Locale.Store)
                     if IsControlJustPressed(1, 38) then
                         if Vehicle == GetVehiclePedIsIn(PlayerPedId(), false) then
                             DeleteVehicle(GetVehiclePedIsIn(PlayerPedId(), false))

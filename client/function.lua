@@ -40,3 +40,12 @@ function GetEntInSight(entityType)
 	local _,_,_,_, ent = GetRaycastResult(rayHandle)
 	return ent
 end
+
+function DrawTopNotification(txt, beep)
+	SetTextComponentFormat("jamyfafi")
+	AddTextComponentString(txt)
+	if string.len(txt) > 99 and AddLongString then
+		AddLongString(txt)
+	end
+	DisplayHelpTextFromStringLabel(0, 0, beep, -1)
+end
