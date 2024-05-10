@@ -159,13 +159,13 @@ Citizen.CreateThread(function()
                                     ResetPedWeaponMovementClipset(pPed)
                                     ResetPedStrafeClipset(pPed)
                                     SetVehicleDoorShut(vehicle, 5)
-                                    IsInAction = false
                                     IncreaseReward()
                                     ClearPedTasksImmediately(pPed)
                                     DeleteObject(BagProp)
                                     
                                     DisableControl = false
                                     SetBag(pPed, true)
+                                    IsInAction = false
                                 end)
                             end
                         end
