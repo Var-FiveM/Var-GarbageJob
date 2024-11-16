@@ -24,6 +24,7 @@ local InDutty
 local HashBag = GetHashKey("WEAPON_GARBAGEBAG")
 local BagProp
 local IsInAction = false
+local ClothesChanged = false
 
 Vehicle = nil 
 
@@ -53,6 +54,7 @@ function StartInService()
     elseif not InService then
         InGarage = false
         RewardAmount = Shared.RewardAmount
+        ClothesChanged = false
     end 
 end
 
@@ -95,13 +97,16 @@ Citizen.CreateThread(function()
                     Route = {}
                     Garage = {}
                     ESX.ShowNotification(Shared.Locale.Info)
-                    ESX.TriggerServerCallback('esx_skin:getPlayerSkin', function(skin)
-                        if skin.sex == 0 then
-                            TriggerEvent('skinchanger:loadClothes', skin, Shared.ClothesJob.men)
-                        else
-                            TriggerEvent('skinchanger:loadClothes', skin, Shared.ClothesJob.women)
-                        end
-                    end)
+                    if not ClothesChanged then
+                        ESX.TriggerServerCallback('esx_skin:getPlayerSkin', function(skin)
+                            if skin.sex == 0 then
+                                TriggerEvent('skinchanger:loadClothes', skin, Shared.ClothesJob.men)
+                            else
+                                TriggerEvent('skinchanger:loadClothes', skin, Shared.ClothesJob.women)
+                            end
+                        end)
+                        ClothesChanged = true
+                    end
                     for i = 0, #Shared.GarbagePos, 25 do
                         if Shared.GarbagePos[i] then
                             Route[i] = CreateBlip(Shared.GarbagePos[i], 318, Shared.Blip.Colour, Shared.Blip.StringStart, nil, Shared.Blip.Scale)
@@ -178,6 +183,7 @@ Citizen.CreateThread(function()
             ESX.TriggerServerCallback('esx_skin:getPlayerSkin', function(skin)
                 TriggerEvent('skinchanger:loadSkin', skin)
             end)
+            ClothesChanged = false
             if Route then
                 for i, blip in pairs(Route) do
                     RemoveBlip(blip)
